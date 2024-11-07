@@ -1,8 +1,6 @@
 
 from itertools import permutations
-
 def main():
-   
     mot=input()
     # Obtenir seulement les permutations uniques
     permutations_uniques = sorted(set(permutations(mot)))
@@ -10,8 +8,4 @@ def main():
     # Convertir chaque tuple en chaîne
     for perm in permutations_uniques:
         print(''.join(perm))
-    
-        
-
-
 main()
