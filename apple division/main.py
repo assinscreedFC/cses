@@ -1,46 +1,25 @@
-def moy(tab,n):
-    somme=0
-    for i in range(n):
-        somme+=tab[i]
-    for i in range (n):
-        tab[i]/=somme
-        tab[i]=round(tab[i],2)
-    
-    return tab
-def somme_tab(tab,dep,fin):
-    somme=0
-    for i in range(dep,fin):
-        somme+=tab[i]
-    return somme
-        
-
-
-
+from itertools import combinations
+#utilistation de combination pour genere tout les sous-ensemble possible d'un tableau
+#utilsiation de la formule  somme_totale - 2 * somme_sous_ensemble pour trouver la difference minimale entre deux sous-ensemble
+# s1-s2 -> s1-(somme-s1) -> 2s1-somme ou somme-2s1
+#s2=somme-s1
 def main():
-    n=int(input())
-    nh=input()
-    tab=[int(nombre) for nombre in nh.split()]
+    n = int(input())
+    nh = input()
+    tab = [int(nombre) for nombre in nh.split()]
     
+    tab = sorted(tab)
+    
+    somme_totale = sum(tab)
+    
+    difference_minimale = somme_totale
 
-    tab=sorted(tab)
-    sous_ensemble=[]
-    dep=fin=0
-    for i in range(n):
-        for j in range(i,n): 
-            sous_ensemble.append(somme_tab(tab,i,j))
-    
-    t=len(tab)
-    somme=somme_tab(tab,0,t)
-    res=somme-sous_ensemble[0]
-    for i in range(len(sous_ensemble)):
+    for r in range(1, n):  
+        for sous_ensemble in combinations(tab, r):
+            somme_sous_ensemble = sum(sous_ensemble)
+            difference = abs(somme_totale - 2 * somme_sous_ensemble)
+            difference_minimale = min(difference_minimale, difference)
 
-        if(somme-sous_ensemble[i]<res and i!=8  ):
-            res=somme-sous_ensemble[i]
-
-    
-    print(somme)
-    print(sous_ensemble)
-    
-    print(res)
+    print( difference_minimale)
 
 main()
