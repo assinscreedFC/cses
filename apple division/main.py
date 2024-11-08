@@ -40,7 +40,6 @@ def main():
     
     
     res=round(res)
-    res1=round(res1)
     print(res)
 
 main()
