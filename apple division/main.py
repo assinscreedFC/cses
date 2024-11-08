@@ -25,18 +25,22 @@ def main():
     tab=sorted(tab)
     
     tabvalence=moy(tab,len(tab))
+    sous_ensemble=[]
     dep=fin=0
-    for i in range (5):
-        somme=somme_tab(tab,dep,fin)
-        if(somme<=0.50):
-            fin+=1
-        else: 
-            dep+=1
+    for i in range(n):
+        for j in range(i,n):
+            sous_ensemble.append(somme_tab(i,j))
+    somme=somme_tab(tab,0,n)
+    res=somme-sous_ensemble[0]
+    for i in range(len(sous_ensemble)):
+        if(somme-sous_ensemble[i]<res):
+            res=somme-sous_ensemble[i]
+
+
     
-    res=somme_tab(tab,dep,fin)
-    res1=somme-res
+    
     res=round(res)
     res1=round(res1)
-    print(res1)
+    print(res)
 
 main()
