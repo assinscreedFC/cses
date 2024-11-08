@@ -32,9 +32,8 @@ def main():
     res=somme-sous_ensemble[0]
     for i in range(len(sous_ensemble)):
 
-        if(somme-sous_ensemble[i]<res  and i!=n ):
+        if(somme-sous_ensemble[i]<res  and i!=n-1  ):
             res=somme-sous_ensemble[i]
-
 
     
     
