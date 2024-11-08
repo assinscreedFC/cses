@@ -29,7 +29,7 @@ def main():
     dep=fin=0
     for i in range(n):
         for j in range(i,n):
-            sous_ensemble.append(somme_tab(i,j))
+            sous_ensemble.append(somme_tab(tab,i,j))
     somme=somme_tab(tab,0,n)
     res=somme-sous_ensemble[0]
     for i in range(len(sous_ensemble)):
