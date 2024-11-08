@@ -26,17 +26,20 @@ def main():
     sous_ensemble=[]
     dep=fin=0
     for i in range(n):
-        for j in range(i):
+        for j in range(i,n): 
             sous_ensemble.append(somme_tab(tab,i,j))
-    somme=somme_tab(tab,0,n)
+    
+    t=len(tab)
+    somme=somme_tab(tab,0,t)
     res=somme-sous_ensemble[0]
     for i in range(len(sous_ensemble)):
 
-        if(somme-sous_ensemble[i]<res  and i!=n-1  ):
+        if(somme-sous_ensemble[i]<res and i!=8  ):
             res=somme-sous_ensemble[i]
 
     
-    
+    print(somme)
+    print(sous_ensemble)
     
     print(res)
 
