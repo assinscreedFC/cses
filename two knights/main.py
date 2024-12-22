@@ -1,10 +1,9 @@
 def knights(n, valeur):
     g = 0
-    matrice = [[0] * n for _ in range(n)]
     b=1
     for i in range(n):
         for j in range(n):
-            cases_menacees = chek(matrice, valeur, i, j, n) #nombre de cases menacées par un cavalier à la position (i, j)
+            cases_menacees = chek(valeur, i, j, n) #nombre de cases menacées par un cavalier à la position (i, j)
             g -= cases_menacees #on enlève le nombre de cases menacées par un cavalier à la position (i, j)
             g+=n*n-b #on addition le nombre totale de case moin celle deja visiter
             b+=1
@@ -13,7 +12,7 @@ def knights(n, valeur):
     print(g)
 
 
-def chek(matrice, valeur, i, j, n):
+def chek(valeur, i, j, n):
     """
     Vérifie combien de cases sont menacées par un cavalier à la position (i, j).
     """
