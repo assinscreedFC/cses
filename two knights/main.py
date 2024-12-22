@@ -1,36 +1,40 @@
-import numpy as np
-import asyncio
-def knights(n,valeur):
-    g=0
-    matrice = np.zeros((n, n), dtype=int)
+def knights(n, valeur):
+    g = 0
+    matrice = [[0] * n for _ in range(n)]
+    b=1
     for i in range(n):
         for j in range(n):
-            # Placer un marqueur à la position actuelle
-            matrice[i][j] = 1
-            
-            # Vérifier toutes les positions supérieures à (i, j)
-            for k in range(i, n):
-                for l in range((j+1) if k == i else 0, n):
-                    if chek(matrice, valeur, k, l, n):
-                        g += 1  # Compter les positions valides
-            matrice[i][j] = 0
-    print(g)         
+            cases_menacees = chek(matrice, valeur, i, j, n) #nombre de cases menacées par un cavalier à la position (i, j)
+            g -= cases_menacees #on enlève le nombre de cases menacées par un cavalier à la position (i, j)
+            g+=n*n-b #on addition le nombre totale de case moin celle deja visiter
+            b+=1
             
 
-def chek(matrice,valeur,i,j,n):
-    for (a,b) in valeur:
-        (a,b)=(a+i,b+j)
-        if 0<=a<n and 0<=b<n:
-            if matrice[a][b]==1 :
-                return False
-    return True
+    print(g)
+
+
+def chek(matrice, valeur, i, j, n):
+    """
+    Vérifie combien de cases sont menacées par un cavalier à la position (i, j).
+    """
+    val = 0
+    for dx, dy in valeur:
+        x, y = dx + i, dy + j
+        
+        if 0 <= x < n and 0 <= y < n: #si la position est dans le tableau
+            if x==i and y>j: #on verifie que la case n'est pas deja visiter
+                val+=1
+            elif x>i:
+                val+=1
+    return val
+
+
 def main():
-    
-    valeur= ((2,1),(2,-1),(-2,1),(-2,-1),(1,2),(1,-2),(-1,2),(-1,-2))
-    
+    valeur = ((2, 1), (2, -1), (-2, 1), (-2, -1), (1, 2), (1, -2), (-1, 2), (-1, -2))
+
     n = int(input())
-    for i in range(1, n+1):
-        knights(i,valeur)
-    # Créer une matrice remplie de zéros
-   
+    for i in range(1, n + 1):
+        knights(i, valeur)
+
+
 main()
